@@ -1,21 +1,21 @@
 // imports
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// middleware
-app.use(express.json());
+// MEMO:
+// MongoDBの URLで詰まったらこれみて
+// https:stackoverflow.com/questions/55499175/how-to-fix-error-querysrv-erefused-when-connecting-to-mongodb-atlas
 
-// database connection
-// データベース接続
-// 接続先は必要に応じて変えてください！
 mongoose
-  .connect(
-    'mongodb://takenari:abc@cluster0-shard-00-00.dfedf.mongodb.net:27017,cluster0-shard-00-01.dfedf.mongodb.net:27017,cluster0-shard-00-02.dfedf.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-8x2pda-shard-0&authSource=admin&retryWrites=true&w=majority',
-  )
+  .connect(process.env.DB_URL)
   .then(() => console.log('データベース接続に成功しました'))
   .catch((err) => console.log(err));
 
+const posts = require('./routes/routes');
+app.use(express.json());
+app.use('/api/posts', posts);
 app.listen(port, () => console.log(`server running at localhost:${port}`));
