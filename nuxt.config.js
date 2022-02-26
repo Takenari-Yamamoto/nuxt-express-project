@@ -37,6 +37,9 @@ export default {
     '@nuxtjs/composition-api/module',
     '@nuxtjs/eslint-module',
   ],
+  axios: {
+    baseURL: 'http://localhost:5000', // Used as fallback if no runtime config is provided
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios'],

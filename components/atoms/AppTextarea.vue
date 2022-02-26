@@ -1,7 +1,11 @@
 <template>
   <div class="app-textarea-container">
     <p>{{ label }}</p>
-    <textarea v-model="inputText" class="app-textarea" />
+    <textarea
+      v-model="text"
+      class="app-textarea"
+      @input="$emit('input', text)"
+    />
   </div>
 </template>
 
@@ -14,10 +18,14 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    value: {
+      type: String,
+      default: '',
+    },
   },
-  setup() {
-    const inputText = ref('');
-    return { inputText };
+  setup(props) {
+    const text = ref(props.value);
+    return { text };
   },
 });
 </script>

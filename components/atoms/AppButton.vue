@@ -1,5 +1,5 @@
 <template>
-  <div class="app-button">{{ text }}</div>
+  <div class="app-button" @click="$emit('clickButton')">{{ text }}</div>
 </template>
 
 <script lang="ts">
@@ -24,6 +24,7 @@ export default defineComponent({
   padding: 10px;
   color: black;
   text-align: center;
+  cursor: pointer;
   border: 1px solid black;
 }
 </style>

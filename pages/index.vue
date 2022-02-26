@@ -1,28 +1,27 @@
 <template>
   <div class="index-page">
-    <div class="auth-container box">
-      <AppInput v-model="id" label="ログイン" />
-      <AppInput v-model="password" label="パスワード" />
-      <AppButton text="ログイン" />
-    </div>
-    <div class="auth-container">
-      <AppInput v-model="id" label="ログイン" />
-      <AppInput v-model="password" label="パスワード" />
-      <AppButton text="会員登録" />
+    <p>全ての投稿</p>
+    <div v-for="(post, index) in postList" :key="index" class="post-card">
+      <p>Id: {{ post._id }}</p>
+      <p>Title: {{ post.title }}</p>
+      <p>Content: {{ post.content }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { defineComponent, onMounted } from '@nuxtjs/composition-api';
+import { usePost } from '@/repository/post';
 
 export default defineComponent({
   setup() {
-    const id = ref('');
-    const password = ref('');
-    const isShowLoginForm = ref(true);
+    const { fetchPosts, postList } = usePost();
 
-    return { id, password, isShowLoginForm };
+    onMounted(() => {
+      fetchPosts();
+      console.log(postList);
+    });
+    return { postList };
   },
 });
 </script>
@@ -39,5 +38,11 @@ export default defineComponent({
   flex-direction: column;
   gap: 10px;
   padding: 10px;
+}
+
+.post-card {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
 }
 </style>

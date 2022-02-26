@@ -1,12 +1,12 @@
 <template>
   <div class="app-input-container">
     <p>{{ label }}</p>
-    <input class="app-input" />
+    <input v-model="text" class="app-input" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, toRef } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   props: {
@@ -14,9 +14,14 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    value: {
+      type: [String, Number],
+      default: '',
+    },
   },
-  setup() {
-    return {};
+  setup(props) {
+    const text = toRef(props, 'value');
+    return { text };
   },
 });
 </script>
