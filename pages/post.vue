@@ -24,8 +24,6 @@ import { usePost, PostParams } from '@/repository/post';
 export default defineComponent({
   setup() {
     const { createNewPost } = usePost();
-    // const title = ref('');
-    // const content = ref('');
     const params = ref<PostParams>({
       title: '',
       content: '',

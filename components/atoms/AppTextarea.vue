@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { defineComponent, ref, watch } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   props: {
@@ -25,6 +25,11 @@ export default defineComponent({
   },
   setup(props) {
     const text = ref(props.value);
+
+    watch(props, () => {
+      text.value = props.value;
+    });
+
     return { text };
   },
 });
