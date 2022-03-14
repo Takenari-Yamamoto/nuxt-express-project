@@ -3,6 +3,7 @@
     <p>{{ label }}</p>
     <textarea
       v-model="text"
+      :name="name"
       class="app-textarea"
       @input="$emit('input', text)"
     />
@@ -19,6 +20,10 @@ export default defineComponent({
       default: '',
     },
     value: {
+      type: String,
+      default: '',
+    },
+    name: {
       type: String,
       default: '',
     },

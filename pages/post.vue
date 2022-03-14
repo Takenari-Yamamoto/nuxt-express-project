@@ -4,16 +4,24 @@
     <AppTextarea
       v-model="params.title"
       :value="params.title"
+      class="title"
+      name="title"
       label="タイトル"
       @input="title = $event"
     />
     <AppTextarea
       v-model="params.content"
       :value="params.content"
+      class="content"
+      name="content"
       label="内容"
       @input="content = $event"
     />
-    <AppButton text="投稿" @clickButton="createNewPost(params)" />
+    <AppButton
+      text="投稿"
+      class="button"
+      @clickButton="createNewPost(params)"
+    />
   </div>
 </template>
 
